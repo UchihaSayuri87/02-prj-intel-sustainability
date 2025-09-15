@@ -1,3 +1,7 @@
+  <!-- Back to Top Button -->
+  <a href="#" class="back-to-top" aria-label="Back to top" title="Back to top">
+    ↑ Top
+  </a>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -164,7 +168,7 @@
         <h2>2024</h2>
         <h3>Sustainability Summit</h3>
         <div class="image-container">
-          <img src="img/9.jpg" alt="Intel Sustainability Summit, 2024" />
+          <img src="img/9.jpeg" alt="Intel Sustainability Summit, 2024" />
         </div>
         <p>
           Intel hosts its first Sustainability Summit, uniting suppliers, 
@@ -201,6 +205,18 @@
         toggle.checked = true;
         setDarkMode(true);
       }
+
+      // Show/hide back-to-top button on scroll
+      const backToTop = document.querySelector('.back-to-top');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 200) {
+          backToTop.style.opacity = '1';
+          backToTop.style.pointerEvents = 'auto';
+        } else {
+          backToTop.style.opacity = '0';
+          backToTop.style.pointerEvents = 'none';
+        }
+      });
     </script>
   </footer>
 </body>

@@ -1,3 +1,289 @@
+/* === ENHANCED SCROLL SNAP FOR TIMELINE === */
+.grid-layout {
+	/* ...existing styles... */
+	scroll-snap-type: x mandatory;
+	scroll-padding-left: 32px;
+	scroll-behavior: smooth;
+}
+.glass-card {
+	/* ...existing styles... */
+	scroll-snap-align: center;
+	scroll-margin-left: 32px;
+}
+
+@media (max-width: 900px) {
+	.grid-layout {
+		scroll-snap-type: none;
+		scroll-padding-left: 0;
+		scroll-behavior: auto;
+	}
+	.glass-card {
+		scroll-snap-align: none;
+		scroll-margin-left: 0;
+	}
+}
+/* === INTEL NICHE SPACING & DESIGN === */
+main {
+	padding: 0 0 48px 0;
+	background: linear-gradient(120deg, #f7faff 0%, #e3e8f7 100%);
+	border-radius: 36px 36px 0 0;
+	margin-top: -32px;
+	box-shadow: 0 -2px 32px #4169e11a;
+	position: relative;
+	z-index: 0;
+}
+
+section {
+	margin: 0 auto;
+	max-width: 98vw;
+	padding: 0 2vw;
+}
+
+.grid-layout {
+	margin: 0 auto;
+	padding-bottom: 16px;
+}
+
+/* Subtle blue line under header for Intel feel */
+header::after {
+	content: '';
+	display: block;
+	width: 80px;
+	height: 4px;
+	margin: 24px auto 0 auto;
+	background: linear-gradient(90deg, #4169e1 0%, #00c6fb 100%);
+	border-radius: 2px;
+	opacity: 0.7;
+}
+
+/* === MILESTONE CARD INTERACTIVITY === */
+.glass-card {
+	position: relative;
+	overflow: hidden;
+	transition: box-shadow 0.3s, transform 0.3s;
+	box-shadow: 0 2px 16px #4169e122, 0 1.5px 8px #00c6fb11;
+}
+.glass-card:hover, .glass-card:focus-within {
+	box-shadow: 0 8px 32px #4169e155, 0 4px 24px #00c6fb33;
+	transform: translateY(-8px) scale(1.03);
+	z-index: 2;
+}
+
+/* Reveal details on hover: fade in extra info */
+.glass-card p {
+	max-height: 3.5em;
+	overflow: hidden;
+	transition: max-height 0.4s cubic-bezier(.4,1.6,.4,1), opacity 0.3s;
+	opacity: 0.85;
+}
+.glass-card:hover p, .glass-card:focus-within p {
+	max-height: 200px;
+	opacity: 1;
+}
+
+/* Add a subtle blue glow on card border when hovered */
+.glass-card:hover, .glass-card:focus-within {
+	border: 2.5px solid #47f0ff;
+}
+
+/* For accessibility: allow keyboard focus to reveal details */
+.glass-card:focus-within {
+	outline: 2px solid #47f0ff;
+}
+
+@media (max-width: 900px) {
+	main {
+		border-radius: 24px 24px 0 0;
+		padding-bottom: 24px;
+	}
+	section {
+		padding: 0 1vw;
+	}
+	.grid-layout {
+		padding-bottom: 8px;
+	}
+}
+/* === BACK TO TOP BUTTON === */
+.back-to-top {
+	position: fixed;
+	bottom: 32px;
+	right: 32px;
+	z-index: 100;
+	background: linear-gradient(120deg, #4169e1 60%, #00c6fb 100%);
+	color: #fff;
+	font-size: 1.15rem;
+	font-weight: 600;
+	padding: 12px 22px;
+	border-radius: 32px;
+	box-shadow: 0 4px 24px #4169e155;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s, background 0.3s, box-shadow 0.3s, color 0.3s;
+	text-decoration: none;
+	letter-spacing: 1px;
+}
+.back-to-top:hover, .back-to-top:focus {
+	background: linear-gradient(120deg, #00c6fb 0%, #4169e1 100%);
+	color: #fff;
+	box-shadow: 0 8px 32px #00c6fb77;
+	outline: 2px solid #fff;
+}
+
+:root.dark .back-to-top {
+	background: linear-gradient(120deg, #232a3a 60%, #4169e1 100%);
+	color: #fff;
+	box-shadow: 0 4px 24px #232a3a88;
+}
+.back-to-top:active {
+	transform: scale(0.97);
+}
+/* === TIMELINE FLEXBOX LAYOUT === */
+.grid-layout {
+	/* Use Flexbox for horizontal scrolling on large screens */
+	display: flex;
+	flex-direction: row;
+	gap: 32px;
+	overflow-x: auto;
+	overflow-y: visible;
+	padding: 32px 0 24px 0;
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch;
+	/* Hide scrollbar for a cleaner look */
+	scrollbar-width: thin;
+	scrollbar-color: #4169e1 #e3e8f7;
+}
+.grid-layout::-webkit-scrollbar {
+	height: 10px;
+	background: #e3e8f7;
+}
+.grid-layout::-webkit-scrollbar-thumb {
+	background: #4169e1;
+	border-radius: 6px;
+}
+
+.glass-card {
+	min-width: 320px;
+	max-width: 340px;
+	flex: 0 0 320px;
+	scroll-snap-align: start;
+	/* ...existing glass-card styles... */
+}
+
+@media (max-width: 900px) {
+	.grid-layout {
+		flex-direction: column;
+		gap: 24px;
+		overflow-x: visible;
+		overflow-y: visible;
+		padding: 16px 0 16px 0;
+	}
+	.glass-card {
+		min-width: 0;
+		max-width: 100%;
+		width: 100%;
+		flex: 1 1 100%;
+	}
+}
+/* === DARK MODE: Intel Logo Adjustments === */
+:root.dark header img[src$="intel-header-logo.svg"] {
+	background: linear-gradient(135deg, #232a3a 0%, #4169e1 100%);
+	border: 3px solid #232a3a;
+	outline: 2.5px solid #47f0ff;
+	box-shadow: 0 4px 32px #232a3a88, 0 1.5px 8px #00c6fb33, 0 0 0 6px #232a3a, 0 0 24px 4px #47f0ff44;
+	filter: brightness(1.15) saturate(1.1);
+}
+:root.dark header img[src$="intel-header-logo.svg"]:hover,
+:root.dark header img[src$="intel-header-logo.svg"]:focus {
+	background: linear-gradient(135deg, #4169e1 0%, #232a3a 100%);
+	border: 3px solid #47f0ff;
+	outline: 3px solid #fff;
+	box-shadow: 0 12px 64px #47f0ff77, 0 4px 24px #232a3a55, 0 0 0 8px #232a3a, 0 0 32px 8px #47f0ff55;
+	filter: brightness(1.22) saturate(1.2);
+}
+/* === INTEL-BRANDED HEADER SECTION === */
+header {
+	/* Center header content and add spacing */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 320px;
+	background: linear-gradient(120deg, #4169e1 0%, #6db3f2 100%);
+	box-shadow: 0 4px 32px rgba(65, 105, 225, 0.08);
+	position: relative;
+	z-index: 1;
+}
+
+header > div {
+	width: 100%;
+	max-width: 700px;
+	margin: 0 auto;
+	padding: 32px 10vw 0 10vw;
+	text-align: center;
+}
+
+/* Intel logo: prominent, upright, with shine and margin */
+header img[src$="intel-header-logo.svg"] {
+	width: 140px;
+	min-width: 100px;
+	margin: 0 auto 24px auto;
+	display: block;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #667eea 0%, #00c6fb 100%);
+	padding: 18px;
+	box-shadow: 0 4px 32px rgba(102, 126, 234, 0.18), 0 1.5px 8px rgba(0,0,0,0.08), 0 0 0 6px #fff, 0 0 24px 4px #00c6fb44;
+	border: 3px solid #fff;
+	outline: 2.5px solid #00c6fb;
+	outline-offset: 4px;
+	position: relative;
+	transition: box-shadow 0.3s, transform 0.3s, background 0.3s, outline 0.3s;
+	z-index: 1;
+	/* Upright, no rotation */
+	transform: none;
+}
+header img[src$="intel-header-logo.svg"]::after {
+	content: '';
+	position: absolute;
+	left: 18%;
+	top: 18%;
+	width: 64%;
+	height: 32%;
+	background: linear-gradient(120deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.08) 100%);
+	border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+	pointer-events: none;
+	z-index: 2;
+	filter: blur(0.5px);
+}
+header img[src$="intel-header-logo.svg"]:hover,
+header img[src$="intel-header-logo.svg"]:focus {
+	box-shadow: 0 12px 64px #667eea77, 0 4px 24px #00c6fb55, 0 0 0 8px #fff, 0 0 32px 8px #00c6fb55;
+	background: linear-gradient(135deg, #00c6fb 0%, #667eea 100%);
+	transform: scale(1.07);
+	outline: 3px solid #47f0ff;
+	filter: brightness(1.08) saturate(1.1);
+}
+
+/* Headline: large, bold, with strong contrast */
+header h1 {
+	font-size: 2.6rem;
+	font-weight: 700;
+	color: #fff;
+	letter-spacing: 1.5px;
+	margin: 0 0 16px 0;
+	text-shadow: 0 2px 16px #4169e1cc, 0 1px 2px #2228;
+}
+
+/* Subheading/description: readable, lighter, with contrast */
+header p {
+	font-size: 1.25rem;
+	color: #e3e8f7;
+	margin: 18px 0 0 0;
+	line-height: 1.5;
+	text-shadow: 0 1px 8px #4169e155;
+}
 
 /*
 	Intel Sustainability Timeline CSS
