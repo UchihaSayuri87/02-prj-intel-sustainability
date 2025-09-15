@@ -1,3 +1,344 @@
+
+/*
+	Intel Sustainability Timeline CSS
+	Clean, grouped, and commented for beginners
+	Smooth dark mode transitions
+*/
+
+/* === THEME VARIABLES === */
+:root {
+	--bg-main: #f7faff;
+	--bg-card: rgba(255,255,255,0.7);
+	--text-main: #1a237e;
+	--text-secondary: #4169e1;
+	--card-border: #e3e8f7;
+	--button-bg: #4169e1;
+	--button-text: #fff;
+	--logo-filter: none;
+	--bg-dark-main: #202124;
+	--bg-dark-card: #292a2d;
+	--text-dark-main: #e8eaed;
+	--text-dark-secondary: #8ab4f8;
+	--card-dark-border: #3c4043;
+	--button-dark-bg: #3c4043;
+	--button-dark-text: #e8eaed;
+	--logo-dark-filter: brightness(0) invert(1) drop-shadow(0 0 8px #8ab4f8);
+}
+
+html.dark, body.dark {
+	--bg-main: var(--bg-dark-main);
+	--bg-card: var(--bg-dark-card);
+	--text-main: var(--text-dark-main);
+	--text-secondary: var(--text-dark-secondary);
+	--card-border: var(--card-dark-border);
+	--button-bg: var(--button-dark-bg);
+	--button-text: var(--button-dark-text);
+	--logo-filter: var(--logo-dark-filter);
+}
+
+/* === BASE LAYOUT === */
+body {
+	background: linear-gradient(120deg, var(--bg-main) 0%, #35363a 50%, var(--bg-main) 100%);
+	background-size: 200% 200%;
+	animation: gradient-move 8s ease-in-out infinite;
+	color: var(--text-main);
+	font-family: 'Poppins', sans-serif;
+	margin: 0;
+	min-height: 100vh;
+	font-size: 1.1rem;
+	/* Smooth transition for dark mode toggle */
+	transition: background 0.6s cubic-bezier(.4,0,.2,1), color 0.4s cubic-bezier(.4,0,.2,1);
+}
+
+header, section, footer {
+	background: transparent;
+	color: var(--text-main);
+	/* Smooth transition for dark mode toggle */
+	transition: color 0.4s cubic-bezier(.4,0,.2,1), background 0.6s cubic-bezier(.4,0,.2,1);
+}
+
+/* === TIMELINE CARDS (GLASSMORPHISM) === */
+.glass-card {
+	background: var(--bg-card);
+	color: var(--text-main);
+	border: 1.5px solid var(--card-border);
+	box-shadow: 0 2px 12px 0 rgba(60,64,67,0.10);
+	border-radius: 12px;
+	padding: 20px;
+	max-width: 350px;
+	width: 100%;
+	margin: 0 auto 24px auto;
+	box-sizing: border-box;
+	opacity: 0;
+	animation: fadeInCard 1s ease forwards;
+	backdrop-filter: blur(10px);
+	transition: background 0.4s cubic-bezier(.4,0,.2,1), color 0.4s cubic-bezier(.4,0,.2,1), border 0.4s, box-shadow 0.4s;
+}
+.glass-card:hover {
+	/* Highlight card on hover */
+	background: rgba(138, 180, 248, 0.18);
+	box-shadow: 0 0 24px 6px #8ab4f8, 0 2px 16px 0 rgba(138,180,248,0.18);
+	border: 2px solid #8ab4f8;
+	color: var(--text-main);
+	transition: background 0.3s, box-shadow 0.3s, border 0.3s;
+}
+
+/* === FANCY BUTTON === */
+.fancy-button {
+	background: var(--button-bg);
+	color: var(--button-text);
+	border: none;
+	border-radius: 24px;
+	padding: 12px 32px;
+	font-size: 1.1em;
+	font-family: inherit;
+	cursor: pointer;
+	box-shadow: 0 2px 12px 0 rgba(138,180,248,0.12);
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	transition: background 0.3s cubic-bezier(.4,0,.2,1), color 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s cubic-bezier(.4,0,.2,1);
+}
+.fancy-button:hover {
+	/* Fancy button hover effect */
+	background: #8ab4f8;
+	color: #202124;
+	box-shadow: 0 0 16px 2px #8ab4f8;
+}
+
+/* === INTEL LOGO === */
+header img[src$="intel-header-logo.svg"] {
+	width: 120px;
+	margin: 0 0 12px 0;
+	filter: var(--logo-filter);
+	background: transparent;
+	transition: filter 0.4s cubic-bezier(.4,0,.2,1);
+}
+
+/* === IMAGE CONTAINER & IMAGES === */
+.image-container {
+	overflow: hidden;
+	border-radius: 12px;
+	margin-bottom: 18px;
+	width: 100%;
+	max-width: 420px;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.image-container img {
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+	display: block;
+	object-fit: cover;
+	aspect-ratio: 4/3;
+	border-radius: 10px;
+	box-shadow: 0 2px 12px rgba(102, 126, 234, 0.12);
+	transition: transform 0.3s;
+}
+.image-container img:hover {
+	transform: scale(1.05);
+}
+
+/* === GRID LAYOUT === */
+.grid-layout {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 32px;
+	padding: 32px 10vw;
+	box-sizing: border-box;
+	max-width: 1400px;
+	margin: 0 auto;
+}
+
+header > div {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 32px 10vw 0 10vw;
+	box-sizing: border-box;
+}
+
+/* === RESPONSIVE BREAKPOINTS === */
+@media (max-width: 900px) {
+	.grid-layout {
+		padding: 24px 2vw;
+		gap: 20px;
+		max-width: 100vw;
+	}
+	header > div {
+		padding: 28px 2vw 16px 2vw;
+	}
+	section {
+		padding-top: 8px;
+		padding-bottom: 20px;
+	}
+	.image-container {
+		max-width: 98vw;
+	}
+	.image-container img {
+		max-width: 98vw;
+		aspect-ratio: 4/3;
+	}
+}
+
+@media (max-width: 600px) {
+	body {
+		font-size: 1rem;
+	}
+	.grid-layout {
+		grid-template-columns: 1fr;
+		padding: 4px 0.5vw;
+		gap: 8px;
+		max-width: 100vw;
+	}
+	.glass-card, .content {
+		max-width: 99vw;
+		padding: 8px 2px;
+		font-size: 0.98em;
+		margin-bottom: 10px;
+	}
+	header > div {
+		padding: 8px 1vw 6px 1vw;
+	}
+	section {
+		padding-top: 2px;
+		padding-bottom: 6px;
+	}
+	.image-container {
+		max-width: 99vw;
+	}
+	.image-container img {
+		max-width: 99vw;
+		aspect-ratio: 4/3;
+	}
+	footer {
+		padding: 10px 0 4px 0;
+		margin-top: 12px;
+	}
+}
+
+/* === ANIMATIONS === */
+@keyframes gradient-move {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
+}
+
+:root {
+		--bg-main: #f7faff;
+		--bg-card: rgba(255,255,255,0.7);
+		--text-main: #1a237e;
+		--text-secondary: #4169e1;
+		--card-border: #e3e8f7;
+		--button-bg: #4169e1;
+		--button-text: #fff;
+		--logo-filter: none;
+		--bg-dark-main: #202124; /* Chrome dark mode background */
+		--bg-dark-card: #292a2d; /* Chrome card background */
+		--text-dark-main: #e8eaed; /* Chrome text color */
+		--text-dark-secondary: #8ab4f8; /* Chrome blue accent */
+		--card-dark-border: #3c4043;
+		--button-dark-bg: #3c4043;
+		--button-dark-text: #e8eaed;
+		--logo-dark-filter: brightness(0) invert(1) drop-shadow(0 0 8px #8ab4f8);
+}
+
+html.dark, body.dark {
+		--bg-main: var(--bg-dark-main);
+		--bg-card: var(--bg-dark-card);
+		--text-main: var(--text-dark-main);
+		--text-secondary: var(--text-dark-secondary);
+		--card-border: var(--card-dark-border);
+		--button-bg: var(--button-dark-bg);
+		--button-text: var(--button-dark-text);
+		--logo-filter: var(--logo-dark-filter);
+}
+
+body {
+		background: linear-gradient(120deg, var(--bg-main) 0%, #35363a 50%, var(--bg-main) 100%);
+		background-size: 200% 200%;
+		animation: gradient-move 8s ease-in-out infinite;
+		color: var(--text-main);
+		transition: background 0.6s, color 0.4s;
+}
+
+header, section, footer {
+	background: transparent;
+	color: var(--text-main);
+	transition: color 0.4s;
+}
+
+.glass-card {
+		background: var(--bg-card);
+		color: var(--text-main);
+		border: 1.5px solid var(--card-border);
+		box-shadow: 0 2px 12px 0 rgba(60,64,67,0.10);
+		transition: background 0.4s, color 0.4s, border 0.4s, box-shadow 0.4s;
+}
+
+.glass-card:hover {
+		background: rgba(138, 180, 248, 0.18); /* Chrome blue accent, subtle */
+		box-shadow: 0 0 24px 6px #8ab4f8, 0 2px 16px 0 rgba(138,180,248,0.18);
+		border: 2px solid #8ab4f8;
+		color: var(--text-main);
+}
+
+.fancy-button {
+			background: var(--button-bg);
+			color: var(--button-text);
+			border: none;
+			border-radius: 24px;
+			padding: 12px 32px;
+			font-size: 1.1em;
+			font-family: inherit;
+			cursor: pointer;
+			box-shadow: 0 2px 12px 0 rgba(138,180,248,0.12);
+			transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+				text-align: center;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+}
+.fancy-button:hover {
+		background: #8ab4f8;
+		color: #202124;
+		box-shadow: 0 0 16px 2px #8ab4f8;
+}
+
+/* Logo styling for dark mode */
+header img[src$="intel-header-logo.svg"] {
+		width: 120px;
+		margin: 0 0 12px 0;
+		filter: var(--logo-filter);
+		transition: filter 0.4s;
+		background: transparent;
+}
+/* Moving blue gradient background for the whole page */
+body {
+	/* Responsive blue gradient background using CSS variables */
+	background: linear-gradient(120deg, var(--bg-main) 0%, #6db3f2 50%, var(--bg-main) 100%);
+	background-size: 200% 200%;
+	animation: gradient-move 8s ease-in-out infinite;
+	color: var(--text-main);
+	transition: background 0.6s, color 0.4s;
+}
+
+/* Animate the gradient background */
+@keyframes gradient-move {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
 /* --- THEME VARIABLES --- */
 :root {
 	--bg-main: #f7f8fa;
@@ -90,8 +431,8 @@ header, footer, h1, h2, h3, p, label, .skip-link {
 	outline-offset: 2px;
 }
 .glass-card .image-container {
-	margin-bottom: 18px;
-}
+		margin-bottom: 18px;
+	}
 
 .fancy-button {
 	min-width: 48px;
@@ -179,6 +520,9 @@ label[for="toggle"] {
 	gap: 32px;
 	padding: 32px 10vw;
 	box-sizing: border-box;
+	/* Make cards more centered and readable on wide screens */
+	max-width: 1400px;
+	margin: 0 auto;
 }
 
 header > div {
@@ -189,10 +533,11 @@ header > div {
 }
 
 @media (max-width: 900px) {
-	.grid-layout {
-		padding: 24px 2vw;
-		gap: 20px;
-	}
+		.grid-layout {
+			padding: 24px 2vw;
+			gap: 20px;
+			max-width: 100vw;
+		}
 	header > div {
 		padding: 28px 2vw 16px 2vw;
 	}
@@ -384,26 +729,34 @@ header img[alt="Intel Logo"] {
 				filter: brightness(1.08) saturate(1.1);
 			}
       header img[alt="Intel Logo"]:focus {
-        outline: 3px solid #47f0ff;
-        outline-offset: 4px;
-      }
+	outline: 3px solid #47f0ff;
+	outline-offset: 4px;
+}
 
-/* Responsive image container */
+/* Responsive image container and images for all screens */
+.image-container {
+	overflow: hidden;
+	border-radius: 12px;
+	margin-bottom: 18px;
+	width: 100%;
+	max-width: 420px;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .image-container img {
 	width: 100%;
-	max-width: 320px;
-	border-radius: 12px;
-	box-shadow: 0 2px 12px rgba(102, 126, 234, 0.12);
-	transition: transform 0.5s ease;
-	display: block;
-	margin: 0 auto;
+	max-width: 100%;
 	height: auto;
+	display: block;
+	object-fit: cover;
+	aspect-ratio: 4/3;
+	border-radius: 10px;
+	box-shadow: 0 2px 12px rgba(102, 126, 234, 0.12);
+	transition: transform 0.3s;
 }
-.image-container img:hover {
-	transform: scale(1.05);
-}
-
-/* Add a simple hover effect for images */
 .image-container img:hover {
 	transform: scale(1.05);
 }
@@ -443,11 +796,33 @@ header > div {
     font-size: 1rem;
   }
   /* Stack grid items in a single column and reduce padding/gap */
-  .grid-layout {
-    grid-template-columns: 1fr;
-    padding: 8px 1vw;
-    gap: 12px;
-  }
+	.grid-layout {
+		grid-template-columns: 1fr;
+		padding: 4px 0.5vw;
+		gap: 8px;
+		max-width: 100vw;
+	}
+	.glass-card, .content {
+		max-width: 99vw;
+		padding: 8px 2px;
+		font-size: 0.98em;
+		margin-bottom: 10px;
+	}
+	header > div {
+		padding: 8px 1vw 6px 1vw;
+	}
+	section {
+		padding-top: 2px;
+		padding-bottom: 6px;
+	}
+	.image-container img {
+		max-width: 98vw;
+		aspect-ratio: 4/3;
+	}
+	footer {
+		padding: 10px 0 4px 0;
+		margin-top: 12px;
+	}
   /* Make cards and content fit the screen and reduce padding */
   .glass-card, .content {
     max-width: 98vw;
@@ -466,7 +841,8 @@ header > div {
   }
   /* Make images fit the screen */
   .image-container img {
-    max-width: 98vw;
+		max-width: 99vw;
+		aspect-ratio: 4/3;
   }
   /* Footer styling for small screens */
   footer {
