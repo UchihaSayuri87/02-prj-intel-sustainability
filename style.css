@@ -1,74 +1,160 @@
-/* Add your CSS here */
+/* --- THEME VARIABLES --- */
+:root {
+	--bg-main: #f7f8fa;
+	--bg-main-gradient: linear-gradient(270deg, #667eea, #764ba2, #ffb347, #667eea);
+	--bg-card: rgba(102, 126, 234, 0.25);
+	--text-main: #222;
+	--text-card: #222;
+	--button-bg: linear-gradient(90deg, #667eea, #764ba2, #ffb347, #667eea);
+	--button-text: #fff;
+	--card-border: none;
+	--card-shadow: 0 8px 32px rgba(102, 126, 234, 0.25);
+	--button-glow: none;
+}
+
+:root.dark {
+	--bg-main: #181a20;
+	--bg-main-gradient: linear-gradient(135deg, #181a20 0%, #232946 100%);
+	--bg-card: rgba(36, 40, 54, 0.92);
+	--text-main: #f7f8fa;
+	--text-card: #f7f8fa;
+	--button-bg: linear-gradient(90deg, #232946, #764ba2, #ffb347, #232946);
+	--button-text: #fff;
+	--card-border: 1.5px solid #333a4d;
+	--card-shadow: 0 8px 32px rgba(44, 54, 80, 0.35);
+	--button-glow: 0 0 8px #764ba2, 0 0 16px #232946;
+}
+
 body {
-	background: linear-gradient(135deg, #667eea, #764ba2);
-	color: white;
+	background: var(--bg-main-gradient);
+	background-size: 400% 400%;
+	animation: themeBG 18s ease infinite;
+	color: var(--text-main);
 	font-family: 'Poppins', sans-serif;
 	text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+	margin: 0;
+	min-height: 100vh;
+	font-size: 1.1rem;
+	transition: background 0.4s, color 0.4s;
+}
+
+@keyframes themeBG {
+	0% {background-position: 0% 50%;}
+	50% {background-position: 100% 50%;}
+	100% {background-position: 0% 50%;}
+}
+
+header, footer, h1, h2, h3, p, label, .skip-link {
+	color: var(--text-main) !important;
+	transition: color 0.4s;
 }
 
 .glass-card {
-	/* Glassmorphism card style matching the theme */
-	background: rgba(102, 126, 234, 0.25); /* blue-purple tint */
+	position: relative;
+	overflow: hidden;
+	background: var(--bg-card);
+	color: var(--text-card);
+	border: var(--card-border);
+	box-shadow: var(--card-shadow);
 	backdrop-filter: blur(10px);
 	border-radius: 12px;
 	padding: 20px;
-	/* Add a smooth transition for background and color */
-	transition: background 0.3s, color 0.3s;
+	transition: background 0.4s, color 0.4s, border 0.4s, box-shadow 0.4s;
+	max-width: 350px;
+	width: 100%;
+	margin: 0 auto 24px auto;
+	box-sizing: border-box;
+	opacity: 0;
+	animation: fadeInCard 1s ease forwards;
+}
+.glass-card:nth-child(1) { animation-delay: 0.2s; }
+.glass-card:nth-child(2) { animation-delay: 0.4s; }
+.glass-card:nth-child(3) { animation-delay: 0.6s; }
+.glass-card:nth-child(4) { animation-delay: 0.8s; }
+.glass-card:nth-child(5) { animation-delay: 1.0s; }
+.glass-card:nth-child(6) { animation-delay: 1.2s; }
+.glass-card:nth-child(7) { animation-delay: 1.4s; }
+.glass-card:nth-child(8) { animation-delay: 1.6s; }
+.glass-card:nth-child(9) { animation-delay: 1.8s; }
+@keyframes fadeInCard {
+	to { opacity: 1; }
+}
+.glass-card:hover {
+	transform: scale(1.04) translateY(-4px);
+	box-shadow: 0 16px 48px rgba(102, 126, 234, 0.32), 0 2px 8px rgba(0,0,0,0.10), var(--card-shadow);
+	border-color: #764ba2;
+}
+.glass-card:focus-within, .glass-card:focus {
+	outline: 2px solid #ffb347;
+	outline-offset: 2px;
+}
+.glass-card .image-container {
+	margin-bottom: 18px;
 }
 
-	/* Dark mode for the whole page */
-	body.dark-mode {
-		--bg-color: #1e1e1e;
-		--text-color: #fff;
-		--card-bg: rgba(34, 34, 34, 0.7);
-		--card-shadow: 0 4px 24px rgba(34, 34, 34, 0.25);
-		background: linear-gradient(135deg, #232526, #414345);
-		color: var(--text-color);
-	}
 .fancy-button {
-	background: linear-gradient(90deg, #667eea, #764ba2);
-	color: white;
-.fancy-button {
-	background: linear-gradient(90deg, #667eea, #764ba2);
-	color: white;
+	min-width: 48px;
+	min-height: 48px;
+	background: var(--button-bg);
+	background-size: 200% 200%;
+	color: var(--button-text);
 	border-radius: 12px;
-	padding: 10px 20px;
+	padding: 12px 28px;
 	border: 1px solid rgba(255, 255, 255, 0.25);
-	box-shadow: 0 4px 24px rgba(102, 126, 234, 0.15);
+	box-shadow: 0 4px 24px rgba(102, 126, 234, 0.15), var(--button-glow);
 	cursor: pointer;
+	font-size: 1.1em;
+	outline: none;
+	border: none;
+	text-decoration: none;
+	display: inline-block;
+	text-align: center;
+	transition: background 0.4s, color 0.4s, box-shadow 0.4s, transform 0.2s;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	animation: buttonGradient 8s ease-in-out infinite;
+}
+.fancy-button:hover {
+	transform: scale(1.09);
+	background-position: 100% 0;
+	box-shadow: 0 12px 36px rgba(102, 126, 234, 0.25), var(--button-glow);
+	outline: 2px solid #ffb347;
+}
+.fancy-button:focus {
+	box-shadow: 0 0 0 4px #764ba2, var(--button-glow);
+	outline: none;
+}
+@keyframes buttonGradient {
+	0% { background-position: 0% 50%; }
+	100% { background-position: 100% 50%; }
+}
+
+.darkmode-toggle {
+	display: flex;
+	align-items: center;
+	gap: 8px;
 	font-size: 1em;
-	transition: background 0.3s, color 0.3s;
+	justify-content: flex-end;
 }
-		--text-color: black;
-		--card-bg: rgba(102, 126, 234, 0.25);
-		--card-shadow: 0 4px 24px rgba(102, 126, 234, 0.15);
-	box-shadow: 0 4px 20px rgba(102, 126, 234, 0.25);
+.darkmode-toggle input[type="checkbox"]:focus + label {
+	outline: 2px solid #ffb347;
+	outline-offset: 2px;
 }
-
-.image-container img {
+/* Skip to content link for accessibility */
+.skip-link {
+	position: absolute;
+	left: -999px;
+	top: 10px;
+	max-width: 350px;
 	width: 100%;
-	transition: transform 0.5s ease;
-		border-radius: 12px;
-.image-container img {
-	width: 100%;
-	max-width: 300px;
-	border-radius: 12px;
-	box-shadow: 0 2px 12px rgba(102, 126, 234, 0.12);
-	transition: transform 0.5s ease;
-	display: block;
 	margin: 0 auto;
+	box-sizing: border-box;
 }
 
-/* Add a simple hover effect for images */
-.image-container img:hover {
-	transform: scale(1.05);
-}
-	--text-color: black;
-}
-
+/* Content box for demo dark mode */
 .content {
-	background: var(--bg-color);
-	color: var(--text-color);
+	background: var(--bg-color, white); /* Default to white if not set */
+	color: var(--text-color, black);    /* Default to black if not set */
 	padding: 20px;
 	transition: background 0.3s, color 0.3s;
 }
@@ -79,9 +165,257 @@ body {
 	--text-color: white;
 }
 
-/* Style the dark mode toggle and demo for theme consistency */
-#toggle {
-	accent-color: #764ba2;
+label[for="toggle"] {
+	color: #fff;
+	font-weight: bold;
+	font-size: 1.1em;
+	letter-spacing: 1px;
+	margin-right: 16px;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 80px;
+	margin-top: 12px;
+}
+
+/* Responsive grid layout for timeline cards */
+.grid-layout {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 32px;
+	padding: 32px 10vw;
+	box-sizing: border-box;
+}
+
+header > div {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 32px 10vw 0 10vw;
+	box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+	.grid-layout {
+		padding: 24px 2vw;
+		gap: 20px;
+	}
+	header > div {
+		padding: 28px 2vw 16px 2vw;
+	}
+	section {
+		padding-top: 8px;
+		padding-bottom: 20px;
+	}
+}
+
+@media (max-width: 600px) {
+	body {
+		font-size: 1rem;
+	}
+	.grid-layout {
+		grid-template-columns: 1fr;
+		padding: 8px 1vw;
+		gap: 12px;
+	}
+	.glass-card, .content {
+		max-width: 98vw;
+		padding: 12px 6px;
+		font-size: 1em;
+		margin-bottom: 16px;
+	}
+	header > div {
+		padding: 10px 1vw 8px 1vw;
+	}
+	section {
+		padding-top: 4px;
+		padding-bottom: 10px;
+	}
+	.image-container img {
+		max-width: 98vw;
+	}
+	footer {
+		padding: 16px 0 8px 0;
+		margin-top: 24px;
+	}
+}
+/* Skip to content link for accessibility */
+.skip-link {
+	position: absolute;
+	left: -999px;
+	top: 10px;
+	background: #fff;
+	color: #333;
+	padding: 12px 24px;
+	z-index: 1000;
+	border-radius: 8px;
+	font-weight: bold;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	transition: left 0.2s;
+}
+.skip-link:focus {
+	left: 10px;
+	outline: 3px solid #764ba2;
+}
+/* Highlight the most recent card */
+.highlight-card {
+	border: 2px solid #ffb347;
+	box-shadow: 0 8px 32px rgba(255, 179, 71, 0.25);
+	background: linear-gradient(135deg, #ffe29f 0%, #ffa99f 100%, rgba(102, 126, 234, 0.25));
+	position: relative;
+}
+
+/* Subtle overlay for glass cards for better readability */
+.glass-card::before {
+	content: '';
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	background: rgba(255,255,255,0.08);
+	border-radius: 12px;
+	pointer-events: none;
+}
+.glass-card {
+	position: relative;
+	overflow: hidden;
+	background: rgba(102, 126, 234, 0.25);
+	backdrop-filter: blur(10px);
+	border-radius: 12px;
+	padding: 20px;
+	transition: background 0.3s, color 0.3s, transform 0.2s, box-shadow 0.2s;
+	max-width: 350px;
+	width: 100%;
+	margin: 0 auto 24px auto;
+	box-sizing: border-box;
+}
+.glass-card:hover {
+	transform: scale(1.03);
+	box-shadow: 0 8px 32px rgba(102, 126, 234, 0.25);
+}
+.glass-card .image-container {
+	margin-bottom: 18px;
+}
+
+/* Footer styling */
+footer {
+	margin-top: 48px;
+	padding: 24px 0 16px 0;
+	text-align: center;
+	color: #ccc;
+	font-size: 0.95em;
+	letter-spacing: 0.5px;
+}
+
+/* Ensure .fancy-button is accessible and visually appealing */
+/* Larger button/touch target for accessibility */
+.fancy-button {
+	min-width: 44px;
+	min-height: 44px;
+	background: linear-gradient(90deg, #667eea, #764ba2);
+	color: white;
+	border-radius: 12px;
+	padding: 10px 20px;
+	border: 1px solid rgba(255, 255, 255, 0.25);
+	box-shadow: 0 4px 24px rgba(102, 126, 234, 0.15);
+	cursor: pointer;
+	font-size: 1em;
+	outline: none;
+	border: none;
+	text-decoration: none;
+	display: inline-block;
+	text-align: center;
+	transition: background 0.3s, color 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+.fancy-button:hover {
+	transform: scale(1.05);
+	box-shadow: 0 6px 24px rgba(102, 126, 234, 0.25);
+}
+/* Stronger focus outline for all buttons/links */
+.fancy-button:focus {
+	box-shadow: 0 0 0 4px #764ba2;
+	outline: none;
+}
+/* Style the Intel logo */
+header img[alt="Intel Logo"] {
+		max-width: 180px;
+		min-width: 120px;
+		margin-bottom: 28px;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		border-radius: 50%;
+		background: linear-gradient(135deg, #667eea 0%, #00c6fb 100%);
+		padding: 18px;
+		box-shadow: 0 4px 32px rgba(102, 126, 234, 0.18), 0 1.5px 8px rgba(0,0,0,0.08), 0 0 0 6px #fff, 0 0 24px 4px #00c6fb44;
+		border: 3px solid #fff;
+		outline: 2.5px solid #00c6fb;
+		outline-offset: 4px;
+		position: relative;
+		transition: box-shadow 0.3s, transform 0.3s, background 0.3s, outline 0.3s;
+		z-index: 1;
+				/* Upright, no rotation */
+				transform: none;
+			}
+			header img[alt="Intel Logo"]::after {
+				content: '';
+				position: absolute;
+				left: 18%;
+				top: 18%;
+				width: 64%;
+				height: 32%;
+				background: linear-gradient(120deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.08) 100%);
+				border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+				pointer-events: none;
+				z-index: 2;
+				filter: blur(0.5px);
+			}
+			header img[alt="Intel Logo"]:hover,
+			header img[alt="Intel Logo"]:focus {
+				box-shadow: 0 12px 64px #667eea77, 0 4px 24px #00c6fb55, 0 0 0 8px #fff, 0 0 32px 8px #00c6fb55;
+				background: linear-gradient(135deg, #00c6fb 0%, #667eea 100%);
+				transform: scale(1.07);
+				outline: 3px solid #47f0ff;
+				filter: brightness(1.08) saturate(1.1);
+			}
+}
+
+.image-container img {
+	width: 100%;
+/* Responsive image container */
+.image-container img {
+	width: 100%;
+	max-width: 320px;
+	border-radius: 12px;
+	box-shadow: 0 2px 12px rgba(102, 126, 234, 0.12);
+	transition: transform 0.5s ease;
+	display: block;
+	margin: 0 auto;
+	height: auto;
+}
+.image-container img:hover {
+	transform: scale(1.05);
+}
+
+/* Add a simple hover effect for images */
+.image-container img:hover {
+	transform: scale(1.05);
+}
+	background: var(--bg-color);
+	color: var(--text-color);
+	padding: 20px;
+.content {
+	background: var(--bg-color, white); /* Default to white if not set */
+	color: var(--text-color, black);    /* Default to black if not set */
+	padding: 20px;
+	transition: background 0.3s, color 0.3s;
+}
+
+/* When the checkbox is checked, apply dark mode */
+#toggle:checked ~ .container .content {
+	--bg-color: #1e1e1e;
+	--text-color: white;
+}
 	margin-top: 32px;
 	margin-right: 8px;
 	transform: scale(1.2);
@@ -103,10 +437,65 @@ label[for="toggle"] {
 	margin-top: 12px;
 }
 
-.content {
-	border-radius: 12px;
-	box-shadow: 0 2px 12px rgba(102, 126, 234, 0.12);
-	font-size: 1.1em;
-	width: 300px;
-	text-align: center;
+/* Content box for demo dark mode */
+
+/* Responsive grid layout for timeline cards */
+.grid-layout {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 32px;
+	padding: 32px 10vw;
+	box-sizing: border-box;
+}
+
+header > div {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 32px 10vw 0 10vw;
+	box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+	.grid-layout {
+		padding: 24px 2vw;
+		gap: 20px;
+	}
+	header > div {
+		padding: 28px 2vw 16px 2vw;
+	}
+	section {
+		padding-top: 8px;
+		padding-bottom: 20px;
+	}
+}
+
+@media (max-width: 600px) {
+	body {
+		font-size: 1rem;
+	}
+	.grid-layout {
+		grid-template-columns: 1fr;
+		padding: 8px 1vw;
+		gap: 12px;
+	}
+	.glass-card, .content {
+		max-width: 98vw;
+		padding: 12px 6px;
+		font-size: 1em;
+		margin-bottom: 16px;
+	}
+	header > div {
+		padding: 10px 1vw 8px 1vw;
+	}
+	section {
+		padding-top: 4px;
+		padding-bottom: 10px;
+	}
+	.image-container img {
+		max-width: 98vw;
+	}
+	footer {
+		padding: 16px 0 8px 0;
+		margin-top: 24px;
+	}
 }

@@ -7,7 +7,10 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
+
 <body>
+  <!-- Skip to main content link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- Header / Hero Section -->
   <header>
@@ -19,6 +22,16 @@
         Sustainability Through the Ages
       </h1>
 
+
+      <!-- Dark Mode Toggle -->
+      <div class="darkmode-toggle" style="margin:18px 0 0 0; text-align:right;">
+        <input type="checkbox" id="dark-toggle" aria-label="Toggle dark mode" />
+        <label for="dark-toggle">Dark Mode</label>
+      </div>
+
+      <!-- Learn More Button -->
+      <a href="#timeline" class="fancy-button" style="display:inline-block;margin:18px 0 0 0;">Learn More</a>
+
       <!-- Subheading / Description -->
       <p>
         Explore Intel's journey through time, discovering how our commitment
@@ -26,23 +39,21 @@
         and our planet.
       </p>
 
-      <!-- Dark Mode Toggle Example (for students) -->
-      <input type="checkbox" id="toggle" aria-label="Toggle dark mode">
-      <label for="toggle">Dark Mode</label>
-      <div class="container">
-        <div class="content">Hello World</div>
-      </div>
+
     </div>
   </header>
 
   <!-- Timeline Cards Section -->
+  <main id="main-content">
   <section>
-    <div class="grid-layout">
+    <div class="grid-layout" id="timeline">
       <!-- Card 1: 1968 -->
       <div class="glass-card">
         <h2>1968</h2>
         <h3>Intel Founded</h3>
-        <!-- Add image -->
+        <div class="image-container">
+          <img src="img/1.jpg" alt="Robert Noyce and Gordon Moore, Intel founders, 1968" />
+        </div>
         <p>
           Robert Noyce and Gordon Moore rename the newly formed company 
           NM Electronics to Intel Corporation, laying the foundation for 
@@ -54,7 +65,9 @@
       <div class="glass-card">
         <h2>1971</h2>
         <h3>First Microprocessor</h3>
-        <!-- Add image -->
+        <div class="image-container">
+          <img src="img/2.jpg" alt="Intel 4004 microprocessor, 1971" />
+        </div>
         <p>
           Intel debuts the 4004, the world's first commercial microprocessor, 
           igniting the microprocessor revolution and propelling the future 
@@ -66,7 +79,9 @@
       <div class="glass-card">
         <h2>1978</h2>
         <h3>8086 Processor</h3>
-        <!-- Add image -->
+        <div class="image-container">
+          <img src="img/3.jpg" alt="Intel 8086 processor, 1978" />
+        </div>
         <p>
           Launch of the 8086 processor, establishing the x86 architecture 
           that drives countless PCs and servers in the modern era.
@@ -77,7 +92,9 @@
       <div class="glass-card">
         <h2>1985</h2>
         <h3>386 Processor</h3>
-        <!-- Add image -->
+        <div class="image-container">
+          <img src="img/4.jpg" alt="Intel 386 processor, 1985" />
+        </div>
         <p>
           Intel introduces the 386 processor with 32-bit architecture, 
           ushering in a new era of performance and multitasking for 
@@ -134,8 +151,8 @@
         </p>
       </div>
 
-      <!-- Card 9: 2024 -->
-      <div class="glass-card">
+      <!-- Card 9: 2024 (highlighted) -->
+      <div class="glass-card highlight-card">
         <h2>2024</h2>
         <h3>Sustainability Summit</h3>
         <!-- Add image -->
@@ -147,6 +164,34 @@
       </div>
     </div>
   </section>
+  </main>
   <p>Scroll to view timeline | Hover over cards to learn more!</p>
+
+  <footer style="margin-top:40px;text-align:center;color:#ccc;font-size:0.95em;">
+    &copy; 2025 Intel Sustainability Timeline | Student Project
+    <script>
+      // Dark mode toggle logic
+      const toggle = document.getElementById('dark-toggle');
+      const root = document.documentElement;
+      function setDarkMode(on) {
+        if (on) {
+          root.classList.add('dark');
+        } else {
+          root.classList.remove('dark');
+        }
+      }
+      // Save preference
+      toggle.addEventListener('change', (e) => {
+        setDarkMode(e.target.checked);
+        localStorage.setItem('darkMode', e.target.checked ? '1' : '0');
+      });
+      // On load, set from preference
+      const saved = localStorage.getItem('darkMode');
+      if (saved === '1') {
+        toggle.checked = true;
+        setDarkMode(true);
+      }
+    </script>
+  </footer>
 </body>
 </html>
