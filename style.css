@@ -10,7 +10,6 @@
 	--card-border: none;
 	--card-shadow: 0 8px 32px rgba(102, 126, 234, 0.25);
 	--button-glow: none;
-}
 
 :root.dark {
 	--bg-main: #181a20;
@@ -23,7 +22,6 @@
 	--card-border: 1.5px solid #333a4d;
 	--card-shadow: 0 8px 32px rgba(44, 54, 80, 0.35);
 	--button-glow: 0 0 8px #764ba2, 0 0 16px #232946;
-}
 
 body {
 	background: var(--bg-main-gradient);
@@ -46,8 +44,11 @@ body {
 
 header, footer, h1, h2, h3, p, label, .skip-link {
 	color: var(--text-main) !important;
-	transition: color 0.4s;
-}
+			transition: color 0.4s;
+		  }
+		}
+	  }
+	
 
 .glass-card {
 	position: relative;
@@ -110,12 +111,12 @@ header, footer, h1, h2, h3, p, label, .skip-link {
 	display: inline-block;
 	text-align: center;
 	transition: background 0.4s, color 0.4s, box-shadow 0.4s, transform 0.2s;
-	font-weight: 600;
+	--bg-main-gradient: linear-gradient(270deg, #667eea, #764ba2, #4169e1, #667eea);
 	letter-spacing: 0.5px;
 	animation: buttonGradient 8s ease-in-out infinite;
 }
 .fancy-button:hover {
-	transform: scale(1.09);
+	--button-bg: linear-gradient(90deg, #667eea, #764ba2, #4169e1, #667eea);
 	background-position: 100% 0;
 	box-shadow: 0 12px 36px rgba(102, 126, 234, 0.25), var(--button-glow);
 	outline: 2px solid #ffb347;
@@ -125,7 +126,6 @@ header, footer, h1, h2, h3, p, label, .skip-link {
 	outline: none;
 }
 @keyframes buttonGradient {
-	0% { background-position: 0% 50%; }
 	100% { background-position: 100% 50%; }
 }
 
@@ -133,24 +133,15 @@ header, footer, h1, h2, h3, p, label, .skip-link {
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	font-size: 1em;
+	outline: 2px solid #4169e1;
 	justify-content: flex-end;
 }
 .darkmode-toggle input[type="checkbox"]:focus + label {
-	outline: 2px solid #ffb347;
+	outline: 2px solid #4169e1;
 	outline-offset: 2px;
 }
 /* Skip to content link for accessibility */
-.skip-link {
-	position: absolute;
-	left: -999px;
-	top: 10px;
-	max-width: 350px;
-	width: 100%;
-	margin: 0 auto;
-	box-sizing: border-box;
-}
-
+/* Removed stray border property and border-color property that were outside of any selector */
 /* Content box for demo dark mode */
 .content {
 	background: var(--bg-color, white); /* Default to white if not set */
@@ -212,35 +203,49 @@ header > div {
 }
 
 @media (max-width: 600px) {
+	/* Make body text a bit smaller on small screens */
 	body {
 		font-size: 1rem;
 	}
+	/* Stack grid items in a single column and reduce padding/gap */
 	.grid-layout {
 		grid-template-columns: 1fr;
 		padding: 8px 1vw;
 		gap: 12px;
 	}
+	/* Make cards and content fit the screen and reduce padding */
 	.glass-card, .content {
 		max-width: 98vw;
 		padding: 12px 6px;
 		font-size: 1em;
 		margin-bottom: 16px;
 	}
+	/* Reduce header padding */
 	header > div {
 		padding: 10px 1vw 8px 1vw;
 	}
+	/* Reduce section padding */
 	section {
 		padding-top: 4px;
 		padding-bottom: 10px;
 	}
+	/* Make images fit the screen */
 	.image-container img {
 		max-width: 98vw;
 	}
+	/* Footer styling for small screens */
 	footer {
 		padding: 16px 0 8px 0;
 		margin-top: 24px;
+		text-align: center;
+		color: var(--text-main);
+		font-size: 0.85em;
+		letter-spacing: 0.5px;
+		transition: color 0.4s;
 	}
 }
+
+
 /* Skip to content link for accessibility */
 .skip-link {
 	position: absolute;
@@ -378,10 +383,11 @@ header img[alt="Intel Logo"] {
 				outline: 3px solid #47f0ff;
 				filter: brightness(1.08) saturate(1.1);
 			}
-}
+      header img[alt="Intel Logo"]:focus {
+        outline: 3px solid #47f0ff;
+        outline-offset: 4px;
+      }
 
-.image-container img {
-	width: 100%;
 /* Responsive image container */
 .image-container img {
 	width: 100%;
@@ -401,43 +407,6 @@ header img[alt="Intel Logo"] {
 .image-container img:hover {
 	transform: scale(1.05);
 }
-	background: var(--bg-color);
-	color: var(--text-color);
-	padding: 20px;
-.content {
-	background: var(--bg-color, white); /* Default to white if not set */
-	color: var(--text-color, black);    /* Default to black if not set */
-	padding: 20px;
-	transition: background 0.3s, color 0.3s;
-}
-
-/* When the checkbox is checked, apply dark mode */
-#toggle:checked ~ .container .content {
-	--bg-color: #1e1e1e;
-	--text-color: white;
-}
-	margin-top: 32px;
-	margin-right: 8px;
-	transform: scale(1.2);
-}
-
-label[for="toggle"] {
-	color: #fff;
-	font-weight: bold;
-	font-size: 1.1em;
-	letter-spacing: 1px;
-	margin-right: 16px;
-}
-
-.container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 80px;
-	margin-top: 12px;
-}
-
-/* Content box for demo dark mode */
 
 /* Responsive grid layout for timeline cards */
 .grid-layout {
@@ -468,34 +437,47 @@ header > div {
 		padding-bottom: 20px;
 	}
 }
-
 @media (max-width: 600px) {
-	body {
-		font-size: 1rem;
-	}
-	.grid-layout {
-		grid-template-columns: 1fr;
-		padding: 8px 1vw;
-		gap: 12px;
-	}
-	.glass-card, .content {
-		max-width: 98vw;
-		padding: 12px 6px;
-		font-size: 1em;
-		margin-bottom: 16px;
-	}
-	header > div {
-		padding: 10px 1vw 8px 1vw;
-	}
-	section {
-		padding-top: 4px;
-		padding-bottom: 10px;
-	}
-	.image-container img {
-		max-width: 98vw;
-	}
-	footer {
-		padding: 16px 0 8px 0;
-		margin-top: 24px;
-	}
+  /* Make body text a bit smaller on small screens */
+  body {
+    font-size: 1rem;
+  }
+  /* Stack grid items in a single column and reduce padding/gap */
+  .grid-layout {
+    grid-template-columns: 1fr;
+    padding: 8px 1vw;
+    gap: 12px;
+  }
+  /* Make cards and content fit the screen and reduce padding */
+  .glass-card, .content {
+    max-width: 98vw;
+    padding: 12px 6px;
+    font-size: 1em;
+    margin-bottom: 16px;
+  }
+  /* Reduce header padding */
+  header > div {
+    padding: 10px 1vw 8px 1vw;
+  }
+  /* Reduce section padding */
+  section {
+    padding-top: 4px;
+    padding-bottom: 10px;
+  }
+  /* Make images fit the screen */
+  .image-container img {
+    max-width: 98vw;
+  }
+  /* Footer styling for small screens */
+  footer {
+    padding: 16px 0 8px 0;
+    margin-top: 24px;
+    text-align: center;
+    color: var(--text-main);
+    font-size: 0.85em;
+    letter-spacing: 0.5px;
+    transition: color 0.4s;
+  }
 }
+
+/* End of file: ensure all blocks are properly closed */
