@@ -12,41 +12,56 @@ body {
 	backdrop-filter: blur(10px);
 	border-radius: 12px;
 	padding: 20px;
-	border: 1px solid rgba(255, 255, 255, 0.25);
-	width: 300px;
-	color: white;
-	box-shadow: 0 4px 24px rgba(102, 126, 234, 0.15);
+		background: linear-gradient(135deg, #667eea, #764ba2);
+		color: var(--text-color);
+		font-family: 'Poppins', sans-serif;
+		text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+		transition: background 0.3s, color 0.3s;
 }
 
+	/* Dark mode for the whole page */
+	body.dark-mode {
+		--bg-color: #1e1e1e;
+		--text-color: #fff;
+		--card-bg: rgba(34, 34, 34, 0.7);
+		--card-shadow: 0 4px 24px rgba(34, 34, 34, 0.25);
+		background: linear-gradient(135deg, #232526, #414345);
+		color: var(--text-color);
+	}
 .fancy-button {
 	background: linear-gradient(90deg, #667eea, #764ba2);
 	color: white;
-	border: none;
-	padding: 12px 20px;
-	border-radius: 8px;
-	transition: all 0.3s ease;
-	font-weight: bold;
-	letter-spacing: 1px;
-	box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
-	cursor: pointer;
+		background: var(--card-bg, rgba(102, 126, 234, 0.25));
+		backdrop-filter: blur(10px);
+		border-radius: 12px;
+		padding: 20px;
+		border: 1px solid rgba(255, 255, 255, 0.25);
+		width: 300px;
+		color: var(--text-color);
+		box-shadow: var(--card-shadow, 0 4px 24px rgba(102, 126, 234, 0.15));
 }
 
 .fancy-button:hover {
-	background: linear-gradient(90deg, #764ba2, #667eea);
-	transform: scale(1.05);
+		--bg-color: white;
+		--text-color: black;
+		--card-bg: rgba(102, 126, 234, 0.25);
+		--card-shadow: 0 4px 24px rgba(102, 126, 234, 0.15);
 	box-shadow: 0 4px 20px rgba(102, 126, 234, 0.25);
 }
 
 .image-container img {
 	width: 100%;
 	transition: transform 0.5s ease;
-}
+		border-radius: 12px;
+		box-shadow: 0 2px 12px rgba(102, 126, 234, 0.12);
+		font-size: 1.1em;
+		width: 300px;
+		text-align: center;
+		transition: background 0.3s, color 0.3s;
 
 .image-container img:hover {
-	transform: scale(1.1);
-}
 
-.grid-layout {
+	/* No longer needed: dark mode is now global */
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 	gap: 20px;
